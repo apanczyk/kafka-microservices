@@ -1,0 +1,41 @@
+server:
+  port: 8081
+
+#spring.data.mongodb.host=localhost
+#spring.data.mongodb.port=27017
+#spring.data.mongodb.database=mongo
+
+spring:
+  kafka:
+    producer:
+      value-serializer: "org.apache.kafka.common.serialization.StringSerializer"
+    consumer:
+      group-id: "group1"
+    topic:
+      name: "apn_topic"
+#    servers: "localhost:3032"
+    servers: "my-cluster-kafka-bootstrap:9092"
+    bootstrap-servers: "my-cluster-kafka-bootstrap:9092"
+  data:
+    mongodb:
+      host: "mongo-service"
+#      host: "localhost"
+      port: 27017
+      database: "mongo"
+
+#management.metrics.export.influx.uri=http://localhost:8086
+#management.metrics.export.influx.db=myDb
+#management.metrics.export.influx.user-name=admin
+#management.metrics.export.influx.password=admin
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: always
+  health:
+    probes:
+      enabled: true
